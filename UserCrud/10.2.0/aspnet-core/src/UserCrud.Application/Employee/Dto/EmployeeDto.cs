@@ -12,7 +12,7 @@ namespace UserCrud.Employee.Dto
        
         public string name { get; set; }
         public string email { get; set; }
-        public string position { get; set; }
+        public string position { get; set; } 
         public int salary { get; set; }
     }
 }

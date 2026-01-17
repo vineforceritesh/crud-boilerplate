@@ -19,6 +19,7 @@ namespace UserCrud.Student
             CreateMap<UpdateStudentDto, Students.Student>();
 
             CreateMap<Students.Student, StudentDto>();
+
         }
     }
 }

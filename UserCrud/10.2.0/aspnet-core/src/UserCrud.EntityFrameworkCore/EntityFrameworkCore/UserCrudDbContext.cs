@@ -16,6 +16,9 @@ public class UserCrudDbContext : AbpZeroDbContext<Tenant, Role, User, UserCrudDb
     }
     public DbSet<Student> Students { get; set; }
     public DbSet<UserCrud.Employee.Employee> Employees { get; set; }
+    public DbSet<UserCrud.Collage.Collage> Collages { get; set; }
+
+
 
 
 

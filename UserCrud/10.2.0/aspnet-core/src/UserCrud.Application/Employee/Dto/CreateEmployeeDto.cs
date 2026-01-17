@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UserCrud.Employee.Dto
 {
-    public  class CreateEmployeeDto
+    public  class CreateEmployeeDto 
     {
 
         [Required]
