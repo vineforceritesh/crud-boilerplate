@@ -1,7 +1,11 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
+using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
 using Abp.UI;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UserCrud.Collage.Dto;
 
@@ -16,36 +20,86 @@ namespace UserCrud.Collage
             _collageRepository = collageRepository;
         }
 
-        public async Task<List<CollageDto>> GetAllAsync()
+
+        public async Task<List<CollegeDto>> GetAllAsync()
         {
-            var collages = await _collageRepository.GetAllListAsync();
-            return ObjectMapper.Map<List<CollageDto>>(collages);
+            try
+            {
+                var collages = await _collageRepository.GetAllListAsync();
+                return ObjectMapper.Map<List<CollegeDto>>(collages);
+            }
+            catch (Exception)
+            {
+                throw new UserFriendlyException("Failed to load collage list");
+            }
         }
 
 
-        public async Task<CollageDto> CreateAsync(CreatecollageDto input)
+        public async Task<CollegeDto> CreateAsync(CreateCollegeDto input)
         {
-            var collage = ObjectMapper.Map<Collage>(input);
-            var insertedCollage = await _collageRepository.InsertAsync(collage);
-            return ObjectMapper.Map<CollageDto>(insertedCollage);
+            try
+            {
+                var collage = ObjectMapper.Map<Collage>(input);
+                var insertedCollage = await _collageRepository.InsertAsync(collage);
+                return ObjectMapper.Map<CollegeDto>(insertedCollage);
+            }
+            catch (Exception)
+            {
+                throw new UserFriendlyException("Collage creation failed");
+            }
         }
 
-        public async Task<CollageDto> UpdateAsync(UpdateCollageDto input)
+
+        public async Task<CollegeDto> UpdateAsync(UpdateCollegeDto input)
         {
-            var collage = await _collageRepository.FirstOrDefaultAsync(x => x.Id == input.Id);
-            ObjectMapper.Map(input, collage);
-            await _collageRepository.UpdateAsync(collage);
-            return ObjectMapper.Map<CollageDto>(collage);
+            var collage = await _collageRepository.GetAsync(input.Id);
+            try
+            {
+                ObjectMapper.Map(input, collage);
+                await _collageRepository.UpdateAsync(collage);
+                return ObjectMapper.Map<CollegeDto>(collage);
+            }
+            catch (Exception)
+            {
+                throw new UserFriendlyException("Collage update failed");
+            }
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            var collage = await _collageRepository.FirstOrDefaultAsync(id);
-            if (collage == null)
-                throw new UserFriendlyException("Collage not found");
 
-            await _collageRepository.DeleteAsync(collage);
+        public async Task DeleteAsync(EntityDto<int> input)
+        {
+            try
+            {
+                await _collageRepository.DeleteAsync(input.Id);
+            }
+            catch (Exception)
+            {
+                throw new UserFriendlyException("Collage deletion failed");
+
+            }
+
+
         }
 
+
+        // ✅ For Dropdown (NameValueDto)
+        public async Task<List<NameValueDto>> GetCollegeLookupAsync()
+        {
+            try
+            {
+                var collages = await _collageRepository.GetAllListAsync();
+
+                return collages
+                    .Select(x => new NameValueDto(
+                        x.Name,        // dropdown text
+                        x.Id.ToString() // dropdown value
+                    ))
+                    .ToList();
+            }
+            catch
+            {
+                throw new UserFriendlyException("Failed to load college dropdown");
+            }
+        }
     }
 }

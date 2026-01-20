@@ -4,12 +4,15 @@
   #createStudentForm="ngForm"
   (ngSubmit)="save()">
 
+  <!-- Modal Header -->
   <abp-modal-header
     [title]="'CreateStudent' | localize"
     (onCloseClick)="bsModalRef.hide()">
   </abp-modal-header>
 
   <div class="modal-body">
+
+    <!-- Name -->
     <div class="form-group row required">
       <label class="col-md-3 col-form-label" for="name">
         {{ 'Name' | localize }}
@@ -34,6 +37,7 @@
       </div>
     </div>
 
+    <!-- Email -->
     <div class="form-group row required">
       <label class="col-md-3 col-form-label" for="email">
         {{ 'Email' | localize }}
@@ -56,6 +60,7 @@
       </div>
     </div>
 
+    <!-- Age -->
     <div class="form-group row required">
       <label class="col-md-3 col-form-label" for="age">
         {{ 'Age' | localize }}
@@ -80,21 +85,31 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      <label class="col-md-3 col-form-label" for="college">
+    <!-- ✅ College Dropdown -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="collegeId">
         {{ 'College' | localize }}
       </label>
       <div class="col-md-9">
-        <input
-          type="text"
-          class="form-control"
-          name="college"
-          id="college"
-          [(ngModel)]="student.college" />
+        <select class="form-control" name="collegeId" id="collegeId" required [(ngModel)]="student.collegeId"
+          #collegeModel="ngModel" #collegeEl>
+    
+          <option value="">-- Select College --</option>
+    
+          <option *ngFor="let c of collegeList" [value]="c.value">
+            {{ c.name }}
+          </option>
+        </select>
+    
+    
+        <abp-validation-summary [control]="collegeModel" [controlEl]="collegeEl">
+        </abp-validation-summary>
       </div>
     </div>
+
   </div>
 
+  <!-- Modal Footer -->
   <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createStudentForm.form.valid || saving"

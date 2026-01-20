@@ -17,11 +17,15 @@ import { CreateStudentDialogComponent } from './create/create.component';
 
 @Component({
   templateUrl: './student.component.html',
+  styleUrl: './student.component.css',
   animations: [appModuleAnimation()],
   standalone: true,
  imports: [FormsModule, TableModule, PrimeTemplate, NgIf, PaginatorModule, LocalizePipe],
 })
 export class StudentComponent extends PagedListingComponentBase<StudentDto> {
+getStudents() {
+throw new Error('Method not implemented.');
+}
 
   @ViewChild('dataTable', { static: true }) dataTable: Table;
   @ViewChild('paginator', { static: true }) paginator: Paginator;
@@ -52,10 +56,6 @@ export class StudentComponent extends PagedListingComponentBase<StudentDto> {
 
     this._studentService
       .getAll(
-        this.keyword,
-        this.primengTableHelper.getSorting(this.dataTable),
-        this.primengTableHelper.getSkipCount(this.paginator, event),
-        this.primengTableHelper.getMaxResultCount(this.paginator, event)
       )
       .pipe(finalize(() => this.primengTableHelper.hideLoadingIndicator()))
       .subscribe((result) => {

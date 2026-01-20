@@ -14,4 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UserCrud.Core\UserCrud.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserCrud\" />
+  </ItemGroup>
 </Project>

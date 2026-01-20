@@ -1,25 +1,13 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserCrud.Student.Dto;
+using UserCrud.Students;
 
-namespace UserCrud.Student
+public class StudentMapProfile : Profile
 {
-    public class StudentAutoMapperProfile : Profile
+    public StudentMapProfile()
     {
-        public StudentAutoMapperProfile()
-
-        {   
-            CreateMap<CreateStudentDto, Students.Student>();
-           
-
-            CreateMap<UpdateStudentDto, Students.Student>();
-
-            CreateMap<Students.Student, StudentDto>();
-
-        }
+        CreateMap<CreateStudentDto, Student>();
+        CreateMap<UpdateStudentDto, Student>();
+        CreateMap<Student, StudentDto>();
     }
 }

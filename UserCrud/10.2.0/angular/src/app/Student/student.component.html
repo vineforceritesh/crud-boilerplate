@@ -1,13 +1,14 @@
 <div [@routerTransition]>
+  <!-- ===== Header ===== -->
   <section class="content-header">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row align-items-center">
         <div class="col-6">
           <h1>{{ 'Students' | localize }}</h1>
         </div>
         <div class="col-6 text-right">
           <button class="btn bg-blue" (click)="createStudent()">
-            <i class="fa fa-plus-square"></i>
+            <i class="fa fa-plus-square mr-1"></i>
             {{ 'CreateStudent' | localize }}
           </button>
         </div>
@@ -15,6 +16,7 @@
     </div>
   </section>
 
+  <!-- ===== Content ===== -->
   <section class="content px-2 pb-5">
     <div class="container-fluid">
       <div class="card mb-0 table-wrapper">
@@ -23,6 +25,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-6"></div>
+
             <div class="col-md-6">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -45,7 +48,7 @@
         <div class="card-body">
           <div class="table-responsive">
 
-            <p-table
+            <p-table class="students-table"
               #dataTable
               [value]="primengTableHelper.records"
               [lazy]="true"
@@ -89,41 +92,42 @@
                   <td>{{ record.name }}</td>
                   <td>{{ record.email }}</td>
                   <td>{{ record.age }}</td>
-                  <td>{{ record.college }}</td>
+                  <td>{{ record.collegeName}}</td>
+
                   <td>
-  <div class="d-inline-flex align-items-center gap-3 juctify-content-space-between">
+                    <div
+                      class="d-inline-flex align-items-center gap-2 justify-content-between">
 
-    <button
-      type="button"
-      class="btn btn-sm bg-secondary d-inline-flex align-items-center px-2"
-      (click)="editStudent(record)">
-      <i class="fas fa-pencil-alt mr-2"></i>
-      <span class="fw-normal">{{ 'Edit' | localize }}</span>
-    </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm bg-secondary d-inline-flex align-items-center px-2"
+                        (click)="editStudent(record)">
+                        <i class="fas fa-pencil-alt mr-1"></i>
+                        {{ 'Edit' | localize }}
+                      </button>
 
-    <button
-      type="button"
-      class="btn btn-sm btn-danger d-inline-flex align-items-center px-2 "
-      (click)="delete(record)">
-      <i class="fas fa-trash mr-2"></i>
-      <span class="fw-normal">{{ 'Delete' | localize }}</span>
-    </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-danger d-inline-flex align-items-center px-2"
+                        (click)="delete(record)">
+                        <i class="fas fa-trash mr-1"></i>
+                        {{ 'Delete' | localize }}
+                      </button>
 
-  </div>
-</td>
-
-
+                    </div>
+                  </td>
                 </tr>
               </ng-template>
 
             </p-table>
 
             <!-- ❌ No Data -->
-            <div
-              class="primeng-no-data text-center"
-              *ngIf="primengTableHelper.totalRecordsCount === 0">
-              {{ 'NoData' | localize }}
-            </div>
+           <div
+  class="primeng-no-data text-center"
+  *ngIf="students.length === 0">
+  {{ 'NoData' | localize }}
+</div>
+
 
           </div>
         </div>

@@ -38,6 +38,17 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard],
                     },
                     {
+                        path: 'Country',
+                        loadChildren: () => import('./Countries/countries-routing.module').then((m) => m.CountryRoutingModule),
+                        canActivate: [AppRouteGuard],
+                    },
+                     
+                    {
+                        path: 'collage',
+                        loadChildren: () => import('./Collage/collage.module').then((m) => m.CollageModule),
+                        canActivate: [AppRouteGuard],
+                    },
+                    {
                         path: 'tenants',
                         loadChildren: () => import('./tenants/tenants.module').then((m) => m.TenantsModule),
                         data: { permission: 'Pages.Tenants' },

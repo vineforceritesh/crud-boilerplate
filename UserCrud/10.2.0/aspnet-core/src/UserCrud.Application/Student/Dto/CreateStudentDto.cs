@@ -12,6 +12,7 @@ namespace UserCrud.Student.Dto
 
         public int Age { get; set; }
 
-        public string College { get; set; }
+        [Required]
+        public int CollegeId { get; set; }   // ✅ FK
     }
 }

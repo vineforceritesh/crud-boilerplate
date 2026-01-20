@@ -1621,15 +1621,15 @@ namespace UserCrud.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("PhoneNumber")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
                     b.ToTable("Collages");
                 });
 
-            modelBuilder.Entity("UserCrud.Employee.Employee", b =>
+            modelBuilder.Entity("UserCrud.Countries.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1661,21 +1661,12 @@ namespace UserCrud.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("email")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("salary")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("UserCrud.MultiTenancy.Tenant", b =>
@@ -1753,8 +1744,8 @@ namespace UserCrud.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("College")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CollegeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
@@ -1786,10 +1777,9 @@ namespace UserCrud.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StudentCode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CollegeId");
 
                     b.ToTable("Students");
                 });
@@ -2037,6 +2027,17 @@ namespace UserCrud.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("LastModifierUser");
+                });
+
+            modelBuilder.Entity("UserCrud.Students.Student", b =>
+                {
+                    b.HasOne("UserCrud.Collage.Collage", "College")
+                        .WithMany()
+                        .HasForeignKey("CollegeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("College");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

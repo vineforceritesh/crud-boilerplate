@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserCrud.Collage.Dto;
@@ -7,10 +8,10 @@ namespace UserCrud.Collage
 {
     public interface ICollageAppService : IApplicationService
     {
-        Task<List<CollageDto>> GetAllAsync();
-        Task<CollageDto> CreateAsync(CreatecollageDto input);
-        Task<CollageDto> UpdateAsync(UpdateCollageDto input);
-        Task DeleteAsync(int Id);
+        Task<List<CollegeDto>> GetAllAsync();
+        Task<CollegeDto> CreateAsync(CreateCollegeDto input);
+        Task<CollegeDto> UpdateAsync(UpdateCollegeDto input);
+        Task DeleteAsync(EntityDto<int> input);
 
 
     }

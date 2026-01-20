@@ -1,20 +1,20 @@
-﻿using Abp.Application.Services.Dto;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UserCrud.Student.Dto
 {
-    public class UpdateStudentDto : EntityDto<int>
+    public class UpdateStudentDto
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 
-        [EmailAddress]
         public string Email { get; set; }
 
         public int Age { get; set; }
 
-        public string College { get; set; }
-
-        public bool IsActive { get; set; }
+        [Required]
+        public int CollegeId { get; set; }
     }
 }

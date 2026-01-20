@@ -9,10 +9,10 @@ namespace UserCrud.Collage
 {
     public  class Collage : FullAuditedEntity<int>
     {
-        public int Id { get; set; }
+
         public string Name { get; set; }
         public string Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
         public bool IsActive { get; set; }
         protected Collage()
@@ -22,7 +22,7 @@ namespace UserCrud.Collage
         public Collage(
             string name,
             string address,
-            string phoneNumber)
+            long phoneNumber)
         {
             this.Name = name;
             this.Address = address;

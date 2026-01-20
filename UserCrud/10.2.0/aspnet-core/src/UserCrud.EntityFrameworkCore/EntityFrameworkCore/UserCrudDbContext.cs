@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using UserCrud.Authorization.Roles;
 using UserCrud.Authorization.Users;
+using UserCrud.Countries;
 using UserCrud.MultiTenancy;
 using UserCrud.Students;
 
@@ -15,11 +16,9 @@ public class UserCrudDbContext : AbpZeroDbContext<Tenant, Role, User, UserCrudDb
     {
     }
     public DbSet<Student> Students { get; set; }
-    public DbSet<UserCrud.Employee.Employee> Employees { get; set; }
+
     public DbSet<UserCrud.Collage.Collage> Collages { get; set; }
-
-
-
-
+    public DbSet<Country> Countries { get; set; }
 
 }
+

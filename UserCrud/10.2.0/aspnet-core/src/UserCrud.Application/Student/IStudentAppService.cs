@@ -9,8 +9,8 @@ namespace UserCrud.Student
     public interface IStudentAppService : IApplicationService
     {
         Task<List<StudentDto>> GetAllAsync();
-        Task<Students.Student> CreateAsync(CreateStudentDto input);
-        Task<Students.Student> UpdateAsync(UpdateStudentDto input);
+        Task<StudentDto> CreateAsync(CreateStudentDto input);
+        Task<StudentDto> UpdateAsync(UpdateStudentDto input);
         Task DeleteAsync(EntityDto<int> input);
     }
 }
